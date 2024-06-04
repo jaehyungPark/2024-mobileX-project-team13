@@ -20,7 +20,7 @@ class BaseLLMModel(BaseModel, metaclass=ABCMeta):
 
 class ChatGPTModel(BaseLLMModel):
     model: str = 'gpt-4o'
-    temperature: float = 0.7
+    temperature: float = 0.3
 
     def build(self) -> LLM:
         return ChatOpenAI(
@@ -31,12 +31,12 @@ class ChatGPTModel(BaseLLMModel):
 
 class HuggingFaceEndpointModel(BaseLLMModel):
     endpoint_url: Url = Url('http://huggingface-tgi/')
-    temperature: float = 0.8
+    temperature: float = 0.3
 
     def build(self) -> LLM:
         return HuggingFaceEndpoint(
             endpoint_url=str(self.endpoint_url),
-            temperature=0.01,
+            temperature=0.3,
             # max_new_tokens=512,
             # top_k=10,
             # top_p=0.95,
