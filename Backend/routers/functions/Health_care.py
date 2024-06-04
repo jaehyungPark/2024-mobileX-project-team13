@@ -4,7 +4,7 @@ from fastapi import APIRouter
 
 from llm.chat import build
 from llm.store import LLMStore
-from models.acrostic_generator import InputModel, OutputModel
+from models.Health_care import InputModel, OutputModel
 
 # Configure API router
 router = APIRouter(
@@ -23,7 +23,7 @@ store = LLMStore()
 
 
 @router.post(f'/func/{NAME}')
-async def call_acrostic_generator(model: InputModel) -> OutputModel:
+async def call_Health_care(model: InputModel) -> OutputModel:
     # Create a LLM chain
     chain = build(
         name=NAME,
@@ -32,6 +32,16 @@ async def call_acrostic_generator(model: InputModel) -> OutputModel:
 
     return OutputModel(
         output=chain.invoke({
-            'input_context': model.word,
+            'input_context': f'''
+                # About User
+                * Gender: {model.Gender}
+                * Age: {model.Age}
+                * Height in cm: {model.Height_cm}
+                * Weight in kg: {model.Weight_kg}
+
+                # Workout Objectives
+                * Workout Target: {model.Target}
+                * Workout Goal: {model.Goal}
+            ''',
         }),
     )
