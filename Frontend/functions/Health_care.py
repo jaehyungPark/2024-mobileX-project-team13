@@ -1,4 +1,5 @@
-from models.anime_characterize import InputModel, OutputModel
+# from models.interview_simulator import InputModel, OutputModel
+from models.Health_care import InputModel, OutputModel
 from utils.page import PageModel
 
 
